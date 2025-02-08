@@ -1,20 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import HomeScreen from './screens/HomeScreen';
+import FeteScreen from './screens/FetesScreen';
+import EventsScreen from './screens/EventsScreen';
 
-export default function App() {
+const Drawer = createDrawerNavigator();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Drawer.Navigator
+        initialRouteName="Accueil"
+        screenOptions={{
+          drawerStyle: {
+            backgroundColor: '#f4f4f4', // Fond du drawer (changer la couleur)
+            width: 240, // Largeur du drawer
+          },
+          drawerLabelStyle: {
+            fontSize: 18, // Taille du texte dans le menu
+            fontWeight: 'bold', // Gras pour le texte
+          },
+          headerStyle: {
+            backgroundColor: '#28a745', // Couleur de la barre de header
+          },
+          headerTintColor: '#fff', // Couleur du texte dans le header
+        }}
+      >
+        <Drawer.Screen name="Accueil" component={HomeScreen} />
+        <Drawer.Screen name="Fêtes" component={FeteScreen} />
+        <Drawer.Screen name="Anniversaires" component={EventsScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
